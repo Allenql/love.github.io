@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>3D爱心</title>
+  <style type = "text/css">
+  /*初始化margin和padding值*/
+  *{
+  margin:0;        
+  padding:0;
+  }
+  body{
+  background:black;          /*背景颜色*/
+  }
+  .heart3d{
+  position:absolute;              /*以浏览器定位*/
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  margin:auto;                          /*自适应居中*/
+  width:200px;
+  height:320px;
+  transform-style:preserve-3d;           /*设置3d环境*/
+  animation:rot 12s linear infinite;   /*设置旋转帧数*/
+ 
+  }
+  @keyframes rot{
+  to{
+  transform:rotateX(360deg)  rotateY(360deg);
+  }
+  }
+  /*心形线的基本属性*/
+  .heart{
+  position:absolute;
+  width:200px;
+  height:320px;
+  border:2px solid red;
+  border-left:0;
+  border-bottom:0;
+  border-radius:50% 50% 0/40% 50% 0;
+ 
+  }
+  /*立方体*/
+  .cube{
+  position:relative;
+  width:100px;
+  height:100px;
+  transform-style:preserve-3d;
+  transform:translateX(50px) translateY(220px) translateZ(45PX);
+
+  }
+  .cube div{
+  position:absolute;    /*相对浏览器定位*/
+  width:100px;
+  height:100px;
+  }
+  .cube div:nth-child(1){
+	left:0;
+	top:-100px;
+	transform-origin:bottom;
+	transform:rotateX(90deg);
+	}
+	.cube div:nth-child(2){
+	left:0;
+	top:100px;
+	transform-origin:top;
+	transform:rotateX(-90deg);
+	}
+  .cube div:nth-child(3){
+	left:-100px;
+	top:0;
+	transform-origin:right;
+	transform:rotateY(-90deg);
+	}
+	.cube div:nth-child(4){
+	left:100px;
+	top:0;
+	transform-origin:left;
+	transform:rotateY(90deg);
+	}	
+	.cube div:nth-child(5){
+	left:0;
+	top:0;
+	}
+	.cube div:nth-child(6){
+	left:0;
+	top:0;
+	transform:translateZ(-100px);
+	}
+	.cube div img{
+	width:100px;
+	height:100px;
+	}
+
+ </style>
+ </head>
+ <body>
+ <div class = "heart3d">
+ <div class="cube">
+ <div><img src = "images/1.jpg"></div>
+ <div><img src = "images/2.jpg"></div>
+ <div><img src = "images/3.jpg"></div>
+ <div><img src = "images/4.jpg"></div>
+ <div><img src = "images/5.jpg"></div>
+ <div><img src = "images/6.jpg"></div>
+ <audio src = "src/童话镇.mp3" id="mymusic"></audio>
+ </div>
+ </div>
+<script type = "text/javascript">
+var oHeart3d = document.getElementsByClassName("heart3d")[0];
+var mymusic = document.getElementById("mymusic");
+var mark = true;
+oHeart3d.onclick = function(){
+	if(mark){
+mymusic.play();
+mark = false;
+}else{
+mymusic.pause();
+mark = true;
+}
+}
+ </script>
+  <script type = "text/javascript">
+  /*36条边框线组成心形*/
+  var oHeart = document.getElementsByClassName("heart3d")[0];
+  for(var i = 0;i < 36;i++){
+	  var oDiv = document.createElement("div");
+	  oDiv.className= "heart";
+	  /*控制线条数目和之间的间隔度数i*8deg */
+	  oDiv.style.transform = "rotateY(" + i*10+"deg)rotateZ(45deg) translateX(60px)";
+	  oHeart.appendChild(oDiv);
+  }
+  </script>
+ </body>
+</html>
